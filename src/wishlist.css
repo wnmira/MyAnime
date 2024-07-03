@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+h2 {
+    color: #FFD700;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+#wishlist {
+    width: 80%;
+    max-width: 800px;
+    background-color: #444;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #555;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #777;
+    color: #fff;
+}
+
+th {
+    background-color: black;
+    color: #FFD700;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #666;
+}
+
+button, .status-select, .delete-button {
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #FFD700; 
+    color: #fff;
+    border: 2px solid #555;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    margin-top: 10px;
+}
+
+button:hover, .delete-button:hover {
+    background-color: #FFB600; 
+}
+
+button:active, .delete-button:active {
+    background-color: #FFA500; 
+}
+
+.status-select {
+    color: #000;
+    background-color: #fff;
+}
+
+.status-select:hover, .status-select:focus {
+    border-color: #FFD700;
+}
+a.back {
+    display: block;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #555;
+    background-color: #FFD700; 
+    color: #000; 
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    margin-top: 20px; 
+    text-align: center;
+}
+
+a.back:hover {
+    background-color: #FFB600; 
+}
+
+a.back:active {
+    background-color: #FFA500; 
+}

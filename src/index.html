@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Homepage</title>
+    <link rel="stylesheet" href="anime.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+          <h1>💖 ANIMANGA PLUS 💖</h1>
+          <p>Discover new collections of your favorite series</p>
+      </div>
+      <button class="wishlist"><a href="wishlist.html">WishList</a></button>
+  </header>
+  
+  <div class="search-container">
+      <div class="search-column">
+          <input type="text" id="series_input" placeholder="Enter type">
+          <select id="type_input">
+              <option value="disabled selected">Select type</option>
+              <option value="manga">Manga</option>
+              <option value="anime">Anime</option>
+          </select>
+          <button onclick="buttonClicked()">Search</button>
+      </div>
+  </div>
+  
+    <br>
+    <div id="myDIV"></div>
+  
+    <script src="anime.js"></script>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+header .header-content {
+  text-align: center; 
+  flex-grow: 1; 
+}
+
+header h1 {
+  font-size: 24px;
+  margin: 0;
+  color: #FFD700;
+}
+
+header p {
+  margin: 0;
+  font-size: 16px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#series_input,
+#type_input,
+button {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #FFD700;
+  background-color: #555;
+  color: #fff;
+}
+
+button {
+  background-color: #FFD700;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #FFB600;
+}
+
+.wishlist {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #FFD700;
+  background-color: #555;
+  color: #fff;
+  text-decoration: none;
+}
+
+.wishlist:hover {
+  background-color: #FFB600;
+}
+
+#results-container {
+  margin-top: 20px;
+}
+
+.result-card {
+  display: flex;
+  background-color: #444;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.result-card img {
+  width: 100px;
+  height: 150px;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.result-card .content {
+  flex-grow: 1;
+}
+
+.result-card .content h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #FFD700;
+}
+
+.result-card .content p {
+  margin: 5px 0;
+}
+
+.result-card .actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.result-card .actions button {
+  background-color: #FFD700;
+  color: #333;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.result-card .actions button:hover {
+  background-color: #FFB600;
+}
+
+.result-card .actions a {
+  color: #FFD700;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.result-card .actions a:hover {
+  text-decoration: underline;
+}
+.wishlist {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #FFD700;
+  background-color: gold; 
+  color: #333;
+  text-decoration: none;
+}
+
+.wishlist:hover {
+  background-color: #FFB600;
+}
