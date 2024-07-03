@@ -21,9 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (animeWishlistItems.length === 0) {
                     wishlistContainer.innerHTML = '<p>No items in anime wishlist.</p>';
                 } else {
-                    const table = createWishlistTable(animeWishlistItems, 'anime');
-                    wishlistContainer.appendChild(table);
-                    addEventListeners(animeFilePath, 'anime'); 
+                    fetchTotalEpisodes(animeWishlistItems, 'anime', wishlistContainer);
                 }
             }
         });
@@ -40,11 +38,40 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (mangaWishlistItems.length === 0) {
                     wishlistContainer.innerHTML = '<p>No items in manga wishlist.</p>';
                 } else {
-                    const table = createWishlistTable(mangaWishlistItems, 'manga');
-                    wishlistContainer.appendChild(table);
-                    addEventListeners(mangaFilePath, 'manga'); 
+                    fetchTotalEpisodes(mangaWishlistItems, 'manga', wishlistContainer);
                 }
             }
+        });
+    }
+
+    function fetchTotalEpisodes(wishlistItems, type, wishlistContainer) {
+        const promises = wishlistItems.map(item => {
+            const [title] = item.split('|');
+            const queryType = type === 'anime' ? 'anime' : 'manga';
+            return fetch(`https://api.jikan.moe/v4/${queryType}?q=${encodeURIComponent(title)}`)
+                .then(response => response.json())
+                .then(data => {
+                    const seriesData = data.data[0]; // Assuming the first result is correct
+                    const totalEpisodes = type === 'anime' ? seriesData.episodes : seriesData.chapters;
+                    return { title, totalEpisodes };
+                })
+                .catch(err => {
+                    console.error('Error fetching total episodes/chapters:', err);
+                    return { title, totalEpisodes: 'N/A' };
+                });
+        });
+
+        Promise.all(promises).then(results => {
+            const updatedWishlistItems = wishlistItems.map((item, index) => {
+                const [title, status = 'ongoing', watchedEpisodes = 0] = item.split('|');
+                const totalEpisodes = results[index].totalEpisodes;
+                return `${title}|${status}|${watchedEpisodes}|${totalEpisodes}`;
+            });
+
+            const table = createWishlistTable(updatedWishlistItems, type);
+            wishlistContainer.appendChild(table);
+            addEventListeners(animeFilePath, 'anime');
+            addEventListeners(mangaFilePath, 'manga');
         });
     }
 
@@ -55,13 +82,13 @@ document.addEventListener('DOMContentLoaded', function() {
         headerRow.innerHTML = `
             <th>Title</th>
             <th>Status</th>
-            <th>Watched Episodes/Volumes</th>
+            <th>Watched/Total</th>
             <th>Actions</th>
         `;
         table.appendChild(headerRow);
 
         wishlistItems.forEach((item, index) => {
-            const [title, status = 'ongoing', watchedEpisodes = 0] = item.split('|');
+            const [title, status, watchedEpisodes, totalEpisodes] = item.split('|');
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${title}</td>
@@ -74,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </td>
                 <td>
                     <input type="number" class="watched-episodes" data-index="${index}" data-type="${type}" value="${watchedEpisodes}" min="0">
+                    / ${totalEpisodes}
                 </td>
                 <td>
                     <button class="update-button" data-index="${index}" data-type="${type}">Update</button>
@@ -128,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error(`Error updating wishlist file (${filePath}):`, err);
                 } else {
                     alert('Wishlist updated successfully.');
-                    location.reload(); 
+                    location.reload();
                 }
             });
         });
@@ -149,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.error(`Error updating wishlist file (${filePath}):`, err);
                 } else {
                     alert('Item deleted from wishlist successfully.');
-                    location.reload(); 
+                    location.reload();
                 }
             });
         });
@@ -157,4 +185,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadAnimeWishlist();
     loadMangaWishlist();
-});
+});  
